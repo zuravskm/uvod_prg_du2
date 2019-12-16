@@ -10,7 +10,7 @@ with open("input.geojson", "r", encoding="utf-8") as f:
 ### creating new list od data from GeoJson
 
 points = data["features"]
-# print(points)
+print(points)
 
 
 ### order coordinates by axis

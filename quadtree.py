@@ -3,7 +3,7 @@
 # output = sorting data
 
 
-def find_max_min(points, axis):
+def sort_by_axis(points, axis):
     # print(type(axis))
     points.sort(key=lambda p: p["geometry"]["coordinates"][axis])
     return points
@@ -14,19 +14,21 @@ def find_max_min(points, axis):
 # maybe for turtle drawing
 
 
-def bbox_len_x (points_sort_x):
-    x_max = max(points_sort_x)
-    x_min = min(points_sort_x)
-    length_bbox_x = x_max[0] - x_min[0]
+def bbox_len_x (points):
+    points_sort_x = sort_by_axis(points, 0)
+    x_min = points_sort_x[0][0]
+    x_max = points_sort_x[-1][0]
+    length_bbox_x = x_max - x_min
     # print(x_max, x_min)
     # print("x", length_bbox_x)
     return length_bbox_x
 
 
-def bbox_len_y(points_sort_y):
-    y_max = max(points_sort_y)
-    y_min = min(points_sort_y)
-    length_bbox_y = y_min[1] - y_max[1]
+def bbox_len_y(points):
+    points_sort_y = sort_by_axis(points, 1)
+    y_max = points_sort_y[0][1]
+    y_min = points_sort_y[-1][1]
+    length_bbox_y = y_max - y_min
     # print(y_max, y_min)
     # print("y", length_bbox_y)
     return length_bbox_y
@@ -35,16 +37,17 @@ def bbox_len_y(points_sort_y):
 ### find min a max values of coordinates
 # input = points
 # output = end points of bounding box
+# output structure of bbox_end_poi = [x_max, x_min, y_max, y_min]
 
 
 def bbox(points):
     bbox = []
-    points_sort_x = find_max_min(points, 0)
-    x_min = points_sort_x[0][0]
-    x_max = points_sort_x[-1][0]
+    points_sort_x = sort_by_axis(points, 0) # sorts data by x-axis
+    x_min = points_sort_x[0][0] # [0] selects the first element of the list
+    x_max = points_sort_x[-1][0] # [-1] selects the last element of the list
     bbox.append(x_max)
     bbox.append(x_min)
-    points_sort_y = find_max_min(points, 1)
+    points_sort_y = sort_by_axis(points, 1) # sorts data by y-axis
     y_max = points_sort_y[0][1]
     y_min = points_sort_y[-1][1]
     bbox.append(y_max)
@@ -56,7 +59,7 @@ def bbox(points):
 # quad_box = boundaries of new quadrants
 # quad_num = numbers of new quadrants
 
-def select_new_quad_poi(points_in, quad_box, quadrant):
+def select_new_quad_poi(points_in, quad_box, quad_num):
     new_poi = []
     for poi in points_in:
         ID = poi[0]
