@@ -4,7 +4,8 @@
 
 
 def find_max_min(points, axis):
-    points.sort(key=lambda p: ["geometry"]["coordinates"][axis])
+    print(type(axis))
+    points.sort(key=lambda p: p["geometry"]["coordinates"][axis])
     return points
 
 
@@ -38,12 +39,12 @@ def bbox_len_y(points_sort_y):
 
 def bbox(points):
     bbox = []
-    points_sort_x = find_max_min(points, "x")
+    points_sort_x = find_max_min(points, 0)
     x_min = points_sort_x[0][1]
     x_max = points_sort_x[-1][1]
     bbox.append(x_max)
     bbox.append(x_min)
-    points_sort_y = find_max_min(points, "y")
+    points_sort_y = find_max_min(points, 1)
     y_max = points_sort_y[0][2]
     y_min = points_sort_y[-1][2]
     bbox.append(y_max)
