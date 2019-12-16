@@ -1,3 +1,10 @@
+### zkusit napsat funkci, která se zanoří do slovníku pro souřadnice -> použít v následující funkci
+
+
+def find_coordinates(points):
+    pass
+
+
 ### order coordinates by axis
 # input = list points
 # output = sorting data
@@ -55,7 +62,7 @@ def bbox(points):
     return bbox
 
 
-### select points in the new quadrant and creating a unique group identifier for the new quadrant (cluster_id)
+### select points in the new quadrant -> rozdělit na dvě funkce!!!
 # quad_box = boundaries of new quadrants
 # quad_num = numbers of new quadrants
 
@@ -72,6 +79,13 @@ def select_new_quad_poi(points_in, quad_box, quad_num):
             return new_poi
         else:
             continue
+
+
+### add a unique group identifier for the new quadrant (cluster_id)
+
+
+def add_cluster_id():
+    pass
 
 
 ### distribution data by quadtree
