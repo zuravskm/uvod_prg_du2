@@ -10,7 +10,7 @@ with open("input.geojson", "r", encoding="utf-8") as f:
 ### creating new list od data from GeoJson
 
 points = data["features"]
-# print(points)
+print(points)
 
 
 ### order coordinates by axis
@@ -18,16 +18,21 @@ points = data["features"]
 # output = sorting data = list of points_sort_x, points_sort_y
 
 
-points_sort_x = quadtree.sort_by_axis(points, 0)
-print("osa x", points_sort_x)
-points_sort_y = quadtree.sort_by_axis(points, 1)
-print("osa y", points_sort_y)
+# points_sort_x = quadtree.sort_by_axis(points, 0)
+# print("osa x", points_sort_x)
+# points_sort_y = quadtree.sort_by_axis(points, 1)
+# print("osa y", points_sort_y)
+# výsledek tohoto bloku je, že vytiskne pouze řazení podle osy y (což je správně seřazeno), ale podle osy x nevytiskne nic
 
+# souradnice = points.sort(key=lambda p: p["geometry"]["coordinates"])
 # osa_x = points.sort(key=lambda p: p["geometry"]["coordinates"][0])
 # osa_y = points.sort(key=lambda p: p["geometry"]["coordinates"][1])
 
+# print(souradnice)
 # print("x", osa_x)
 # print("y", osa_y)
+# výsledkem tohoto bloku je vytisknuté None
+
 
 ### find min a max values of coordinates
 # input = points

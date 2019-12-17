@@ -1,4 +1,4 @@
-### zkusit napsat funkci, která se zanoří do slovníku pro souřadnice -> použít v následující funkci
+### zkusit napsat funkci, která se zanoří do slovníku pro souřadnice
 
 
 def find_coordinates(points):
@@ -69,7 +69,6 @@ def bbox(points):
 def select_new_quad_poi(points_in, quad_box, quad_num):
     new_poi = []
     for poi in points_in:
-        ID = poi[0]
         coordx = poi[1]
         coordy = poi[2]
         old_cluster_id = poi[3]
@@ -99,7 +98,7 @@ def quadtree_build(points_in, points_out, bbox_end_poi, quadrant, num_poi):
     if len(points_in) <= num_poi:
         for poi in points_in:
             points_out.append(poi)
-        return points_out
+        return
     else:
         center_box = [(bbox_end_poi[1]+bbox_end_poi[0])/2, (bbox_end_poi[3]+bbox_end_poi[2])/2]
         quad_1_bbox = [center_box[0], bbox_end_poi[1], bbox_end_poi[2], center_box[1]]
