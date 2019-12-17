@@ -1,16 +1,28 @@
 import json
 import quadtree as q
 
-### loading input GeoJSON data
+##### functions that are not in the module quadtree
+
+### finally saving the output to a new GoeJSON file
+
+
+def create_new_geojson (points_out):
+    gj_structure = {'type': 'FeatureCollection'}
+    # gj_structure['features'] = something
+    with open("output.geojson", "w", encoding="utf-8") as f:
+        points_out.dump(gj_structure, f, indent=2, ensure_ascii=False)
+
+
+##### body of program
+
+### loading input GeoJSON data creating new list of data from GeoJson
 
 with open("input.geojson", "r", encoding="utf-8") as f:
     data = json.load(f)
 
 
-### creating new list od data from GeoJson
-
 points = data["features"]
-print(points)
+# print(points)
 
 
 ### order coordinates by axis
@@ -22,15 +34,15 @@ points_sort_x = q.sort_by_axis(points, 0)
 print("osa x", points_sort_x)
 points_sort_y = q.sort_by_axis(points, 1)
 print("osa y", points_sort_y)
-# výsledek tohoto bloku je, že vytiskne pouze řazení podle osy y (což je správně seřazeno), ale podle osy x nevytiskne nic
+# výsledek tohoto bloku je, že vytiskne pouze řazení podle osy y (což je správně seřazeno), ale podle osy x vytiskne None
 
-souradnice = points.sort(key=lambda p: p["geometry"]["coordinates"])
-osa_x = points.sort(key=lambda p: p["geometry"]["coordinates"][0])
-osa_y = points.sort(key=lambda p: p["geometry"]["coordinates"][1])
+# souradnice = sorted(points, key=lambda p: p["geometry"]["coordinates"], reverse=False)
+# osa_x = sorted(points, key=lambda p: p["geometry"]["coordinates"][0], reverse=False)
+# osa_y = sorted(points, key=lambda p: p["geometry"]["coordinates"][0], reverse=False)
 
-print(souradnice)
-print("x", osa_x)
-print("y", osa_y)
+# print(souradnice)
+# print("x", osa_x)
+# print("y", osa_y)
 # výsledkem tohoto bloku je vytisknuté None
 
 

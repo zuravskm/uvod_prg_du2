@@ -1,8 +1,9 @@
 ### zkusit napsat funkci, která se zanoří do slovníku pro souřadnice
 
 
-def find_coordinates(points):
-    pass
+def find_coordinates(points, axis):
+    points(key=lambda p: p["geometry"]["coordinates"][axis])
+    return points
 
 
 ### order coordinates by axis
@@ -15,27 +16,34 @@ def sort_by_axis(points, axis):
     points.sort(key=lambda p: p["geometry"]["coordinates"][axis])
     return points
 
+    ## a failed attempt to select coordinates
+    # find = find_coordinates(points, axis)
+    # points_sort = find.sort()
+    # return points_sort
+
+    ## a new failed attempt to select coordinates
+    # points_sort = sorted(points, key=lambda p: p["geometry"]["coordinates"][axis], reverse=False)
+    # return points_sort
+
 
 ### compute length of bounding box
 # it probably won't be needed
 # maybe for turtle drawing
+# ještě from math import abs -> napsat na začátek, nebo obě funkce přesunout do split.py
 
-
-def bbox_len_x (points):
-    points_sort_x = sort_by_axis(points, 0)
+def bbox_len_x (points_sort_x):
     x_min = points_sort_x[0][0]
     x_max = points_sort_x[-1][0]
-    length_bbox_x = x_max - x_min
+    length_bbox_x = abs(x_max - x_min)
     # print(x_max, x_min)
     # print("x", length_bbox_x)
     return length_bbox_x
 
 
-def bbox_len_y(points):
-    points_sort_y = sort_by_axis(points, 1)
+def bbox_len_y(points_sort_y):
     y_max = points_sort_y[0][1]
     y_min = points_sort_y[-1][1]
-    length_bbox_y = y_max - y_min
+    length_bbox_y = abs(y_max - y_min)
     # print(y_max, y_min)
     # print("y", length_bbox_y)
     return length_bbox_y
@@ -50,8 +58,8 @@ def bbox_len_y(points):
 def bbox(points):
     bbox = []
     points_sort_x = sort_by_axis(points, 0) # sorts data by x-axis
-    x_min = points_sort_x[0][0] # [0] selects the first element of the list
-    x_max = points_sort_x[-1][0] # [-1] selects the last element of the list
+    x_min = points_sort_x[0][0] # [0] selects the first element of the sorted list
+    x_max = points_sort_x[-1][0] # [-1] selects the last element of the sorted list
     bbox.append(x_max)
     bbox.append(x_min)
     points_sort_y = sort_by_axis(points, 1) # sorts data by y-axis
@@ -75,9 +83,9 @@ def select_new_quad_poi(points_in, quad_box, quad_num):
         cluster_id = old_cluster_id + "1"
         if quad_box[1] <= coordx <= quad_box[0] and quad_box[3] <= coordy <= quad_box[2]:
             new_poi.append([ID, coordx, coordy, cluster_id])
-            return new_poi
         else:
             continue
+        return new_poi
 
 
 ### add a unique group identifier for the new quadrant (cluster_id)
@@ -119,12 +127,3 @@ def quadtree_build(points_in, points_out, bbox_end_poi, quadrant, num_poi):
         quadtree_build(new_poi_4, points_out, quad_4_bbox, 4, num_poi)
     return points_out
 
-
-### finally saving the output to a new GoeJSON file
-
-
-def create_new_geojson (points_out):
-    gj_structure = {'type': 'FeatureCollection'}
-    # gj_structure['features'] = something
-    with open("output.geojson", "w", encoding="utf-8") as f:
-        points_out.dump(gj_structure, f, indent=2, ensure_ascii=False)
