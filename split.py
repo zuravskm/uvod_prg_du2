@@ -1,5 +1,5 @@
 import json
-import quadtree
+import quadtree as q
 
 ### loading input GeoJSON data
 
@@ -18,19 +18,19 @@ print(points)
 # output = sorting data = list of points_sort_x, points_sort_y
 
 
-# points_sort_x = quadtree.sort_by_axis(points, 0)
-# print("osa x", points_sort_x)
-# points_sort_y = quadtree.sort_by_axis(points, 1)
-# print("osa y", points_sort_y)
+points_sort_x = q.sort_by_axis(points, 0)
+print("osa x", points_sort_x)
+points_sort_y = q.sort_by_axis(points, 1)
+print("osa y", points_sort_y)
 # výsledek tohoto bloku je, že vytiskne pouze řazení podle osy y (což je správně seřazeno), ale podle osy x nevytiskne nic
 
-# souradnice = points.sort(key=lambda p: p["geometry"]["coordinates"])
-# osa_x = points.sort(key=lambda p: p["geometry"]["coordinates"][0])
-# osa_y = points.sort(key=lambda p: p["geometry"]["coordinates"][1])
+souradnice = points.sort(key=lambda p: p["geometry"]["coordinates"])
+osa_x = points.sort(key=lambda p: p["geometry"]["coordinates"][0])
+osa_y = points.sort(key=lambda p: p["geometry"]["coordinates"][1])
 
-# print(souradnice)
-# print("x", osa_x)
-# print("y", osa_y)
+print(souradnice)
+print("x", osa_x)
+print("y", osa_y)
 # výsledkem tohoto bloku je vytisknuté None
 
 
@@ -39,7 +39,7 @@ print(points)
 # output = end points of bounding box
 # structure of bbox_end_poi = [x_max, x_min, y_max, y_min]
 
-# bbox_end_poi = quadtree.bbox(points)
+# bbox_end_poi = q.bbox(points)
 # print(bbox_end_poi)
 
 
@@ -50,10 +50,10 @@ print(points)
 
 # if len(points) <= num_poi:
     # points_out = points.append([ID, coord[0], coord[1], 0]) # add cluster_id 0
-    # quadtree.create_new_geojson(points_out)
+    # q.create_new_geojson(points_out)
 
 # else:
     # points_out = []
-    # new_points = quadtree.select_new_quad_poi(points, bbox_end_poi, quadrant)
-    # points_out = quadtree.quadtree_build(new_points, points_out, bbox_end_poi, quadrant, num_poi)
-    # quadtree.create_new_geojson(points_out)
+    # new_points = q.select_new_quad_poi(points, bbox_end_poi, quadrant)
+    # points_out = q.quadtree_build(new_points, points_out, bbox_end_poi, quadrant, num_poi)
+    # q.create_new_geojson(points_out)
