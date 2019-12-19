@@ -13,7 +13,7 @@ def find_coord(feat):
 
 
 ### order coordinates by axis
-# input = list points, axis - [0] for axis x, [1] for axis y
+# input = list points, axis - 0 for axis x, 1 for axis y
 # output = sorting data
 
 
