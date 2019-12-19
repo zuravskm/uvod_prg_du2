@@ -43,18 +43,17 @@ def find_borders_lines(points):
 
 
 ### distribution data by quadtree
-# num_poi = the minimum number of points in the quadrant = 50
-# the first time using this function points_in = points
+# num_poi = the minimum number of points in the quadrant
 # points_out = output list of points
-# borders = x_max, x_min, y_max, y_min, x_mid, y_mid
 # quad = which quadrant to call because of signs and the calculation of the new quadrant half
 # for the firts call of quadtree function is quad = 0
+# rank = for gradually assign an identifier "cluster_id" to points
 
 
 def quadtree_build(feat, points_out, half_len_x, half_len_y, x_mid, y_mid, rank, quad, num_poi):
     if len(feat) < num_poi:
         for poi in feat:
-            poi["properties"]["cluster_id"] = 0
+            poi["properties"]["cluster_id"] = rank
             points_out.append(poi)
         return points_out
 
