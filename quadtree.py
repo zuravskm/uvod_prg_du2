@@ -68,13 +68,13 @@ def quadtree_build(feat, points_out, half_len_x, half_len_y, x_mid, y_mid, rank,
     for point in feat:
         coord = point['geometry']['coordinates']
         coordx, coordy = coord
-        if coordx < x_mid and coordy > y_mid:
+        if coordx < x_mid and coordy > y_mid: # top left quadrant
             quad_top_left.append(point)
-        elif coordx > x_mid and coordy > y_mid:
+        elif coordx > x_mid and coordy > y_mid: # top right quadrant
             quad_top_left.append(point)
-        elif coordx < x_mid and coordy < y_mid:
+        elif coordx < x_mid and coordy < y_mid: # bottom left quadrant
             quad_top_left.append(point)
-        elif coordx > x_mid and coordy < y_mid:
+        elif coordx > x_mid and coordy < y_mid: # bottom right quadrant
             quad_top_left.append(point)
 
     # designation of a particular quadrant
