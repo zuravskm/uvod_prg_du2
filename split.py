@@ -13,6 +13,7 @@ def create_new_geojson (points_out):
         points_out.dump(gj_structure, f, indent=2, ensure_ascii=False)
 
 
+
 ##### body of program
 
 ### loading input GeoJSON data creating new list of data from GeoJson

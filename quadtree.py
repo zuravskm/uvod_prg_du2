@@ -1,9 +1,13 @@
-### zkusit napsat funkci, která se zanoří do slovníku pro souřadnice
+### function for find coordinates
 
 
-def find_coordinates(points, axis):
-    points(key=lambda p: p["geometry"]["coordinates"][axis])
-    return points
+def find_coord(feat):
+    points_list = []
+    for point in feat:
+        coord = point['geometry']['coordinates']
+        # print(coord)
+        points_list.append(coord)
+    return points_list
 
 
 ### order coordinates by axis
@@ -13,40 +17,22 @@ def find_coordinates(points, axis):
 
 def sort_by_axis(points, axis):
     # print(type(axis))
-    points.sort(key=lambda p: p["geometry"]["coordinates"][axis])
+    points.sort(key=lambda p: p[axis])
     return points
-
-    ## a failed attempt to select coordinates
-    # find = find_coordinates(points, axis)
-    # points_sort = find.sort()
-    # return points_sort
-
-    ## a new failed attempt to select coordinates
-    # points_sort = sorted(points, key=lambda p: p["geometry"]["coordinates"][axis], reverse=False)
-    # return points_sort
 
 
 ### compute length of bounding box
-# it probably won't be needed
-# maybe for turtle drawing
-# ještě from math import abs -> napsat na začátek, nebo obě funkce přesunout do split.py
-
-def bbox_len_x (points_sort_x):
-    x_min = points_sort_x[0][0]
-    x_max = points_sort_x[-1][0]
-    length_bbox_x = abs(x_max - x_min)
-    # print(x_max, x_min)
-    # print("x", length_bbox_x)
-    return length_bbox_x
+# input = sorted points by given axis and axis: 0 = axis x, 1 = axis y
+# output = length of the bounding box side
 
 
-def bbox_len_y(points_sort_y):
-    y_max = points_sort_y[0][1]
-    y_min = points_sort_y[-1][1]
-    length_bbox_y = abs(y_max - y_min)
-    # print(y_max, y_min)
-    # print("y", length_bbox_y)
-    return length_bbox_y
+def bbox_len(points_sort, axis):
+    axis_min = points_sort[0][axis]
+    axis_max = points_sort[-1][axis]
+    length_bbox = fabs(axis_max - axis_min)
+    # print(axis_max, axis_min)
+    # print(length_bbox)
+    return length_bbox
 
 
 ### find min a max values of coordinates
