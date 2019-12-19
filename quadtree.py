@@ -29,12 +29,12 @@ def sort_by_axis(points, axis):
 
 
 def find_borders_lines(points):
-    sort_by_x = sort_by_axis(points, [0])
+    sort_by_x = sort_by_axis(points, 0)
     x_min = sort_by_x[0][0]
     x_max = sort_by_x[-1][0]
     x_mid = fabs(x_max - x_min)/2
 
-    sort_by_y = sort_by_axis(points, [1])
+    sort_by_y = sort_by_axis(points, 0)
     y_min = sort_by_y[0][1]
     y_max = sort_by_y[-1][1]
     y_mid = fabs(y_max - y_min)/2
@@ -45,7 +45,7 @@ def find_borders_lines(points):
 ### distribution data by quadtree
 # num_poi = the minimum number of points in the quadrant = 50
 # the first time using this function points_in = points
-# points_out = output list of points points
+# points_out = output list of points
 # borders = x_max, x_min, y_max, y_min, x_mid, y_mid
 # quad = which quadrant to call because of signs and the calculation of the new quadrant half
 # for the firts call of quadtree function is quad = 0
@@ -77,6 +77,7 @@ def quadtree_build(feat, points_out, half_len_x, half_len_y, x_mid, y_mid, rank,
             quad_bottom_right.append(coord)
 
     # designation of a particular quadrant
+    # always add or subtract half of the bounding box length depending on the new quadrant
 
     if quad == 1:
         x_mid = x_mid - half_len_x
@@ -95,7 +96,7 @@ def quadtree_build(feat, points_out, half_len_x, half_len_y, x_mid, y_mid, rank,
         y_mid = y_mid - half_len_y
 
     # recursive calls a function
-    # the function gets modified parameters: len_x/2 and len_y/2, rank + 1
+    # this recursive function gets modified parameters: len_x/2 and len_y/2, rank + 1
     quadtree_build(quad_top_left, points_out, half_len_x/2, half_len_y/2, x_mid, y_mid, rank+1, quad=1, num_poi=50)
     quadtree_build(quad_top_right, points_out, half_len_x/2, half_len_y/2, x_mid, y_mid, rank+1, quad=2, num_poi=50)
     quadtree_build(quad_bottom_left, points_out, half_len_x/2, half_len_y/2, x_mid, y_mid, rank+1, quad=3, num_poi=50)
