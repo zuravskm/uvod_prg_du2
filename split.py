@@ -28,8 +28,8 @@ rank = 0 # if a user entered a list with less than 50 points, they would be give
 quad = 0 # for the firts call of quadtree, because it must not recalculate half quadrants, but use the original ones
 num_poi = 50 # minimum number of points in quadrants
 
+
 completely_final_list = q.quadtree_build(feat, points_out, half_len_x, half_len_y, x_mid, y_mid, 0, 0, 50)
-# 0 proto, že nechci dělat přepočet midů, ale ty původní pro první volání rekurzivní funkce
 
 
 ### finally saving the output to a new GoeJSON file - this function is use in recursive function
@@ -39,4 +39,3 @@ gj_structure = {'type': 'FeatureCollection'}
 gj_structure['features'] = completely_final_list
 with open("output.geojson", "w", encoding="utf-8") as f:
     completely_final_list.dump(gj_structure, f, indent=2, ensure_ascii=False)
-
