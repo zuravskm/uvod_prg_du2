@@ -1,3 +1,5 @@
+from math import fabs
+
 ### function for find coordinates
 
 
@@ -11,7 +13,7 @@ def find_coord(feat):
 
 
 ### order coordinates by axis
-# input = list points
+# input = list points, axis - [0] for axis x, [1] for axis y
 # output = sorting data
 
 
@@ -21,79 +23,85 @@ def sort_by_axis(points, axis):
     return points
 
 
-### compute length of bounding box
-# input = sorted points by given axis and axis: 0 = axis x, 1 = axis y
-# output = length of the bounding box side
+### find borders of bounding box and middle lines for divided quadrants
+# input are points
+# output are borders of bounding box: x_max, x_min, y_max, y_min and middle: x_mid, y_mid
 
 
-def bbox_len_2(points):
-    points_sort_x = sort_by_axis(points, 0)
-    x_min = points_sort_x[0][0]
-    x_max = points_sort_x[-1][0]
-    length_bbox_x = abs(x_max - x_min)
-    points_sort_y = sort_by_axis(points, 1)
-    y_max = points_sort_y[0][1]
-    y_min = points_sort_y[-1][1]
-    length_bbox_y = abs(y_max - y_min)
-    return length_bbox_x, length_bbox_y
+def find_borders_lines(points):
+    sort_by_x = sort_by_axis(points, [0])
+    x_min = sort_by_x[0][0]
+    x_max = sort_by_x[-1][0]
+    x_mid = fabs(x_max - x_min)/2
 
+    sort_by_y = sort_by_axis(points, [1])
+    y_min = sort_by_y[0][1]
+    y_max = sort_by_y[-1][1]
+    y_mid = fabs(y_max - y_min)/2
 
-### function for dividing sides of a bounding box
-
-
-def divide_sides_bbox(length):
-    new_length = length/2
-    return new_length
-
-
-### select points in the new quadrant
-
-
-def select_new_quad_poi(points):
-    new_poi_1 = []
-    new_poi_2 = []
-    new_poi_3 = []
-    new_poi_4 = []
-    length = bbox_len_2(points)
-    half_len_x = divide_sides_bbox(length[0])
-    half_len_y = divide_sides_bbox(length[1])
-    for poi in points:
-        if (poi[0] > 0 and poi[0] < half_len_x) and (poi[1] > half_len_y and poi[1] < length[1]):
-            # kvadrant vlevo na hoře
-            new_poi_1.append(poi)
-        elif (poi[0] > half_len_x and poi[0] < length[0]) and (poi[1] > half_len_y and poi[1] < length[1])
-            # kvadrant vpravo nahoře
-            new_poi_2.append(poi)
-        elif (poi[0] > 0 and poi[0] < hlaf_len_x) and (poi[1] > 0 and poi[1] < half_len_y)
-            # kvadrant vlevo dole
-            new_poi_3.append(poi)
-        elif (poi[0] > half_len_x and poi[0] < length[0]) and (poi[1] > 0 and poi[1] < half_len_y)
-            # kvadrant vpravo dole
-            new_poi_4.append(poi)
-    return new_poi_1, new_poi_2, new_poi_3, new_poi_4
-
-
-### add cluster_id function
-
-
-def add_cluster_id(data, points_out, rank):
-    for i in data:
-        i["properties"]["cluster_id"] = rank # už zapisuju cluster_id
+    return x_max, x_min, y_max, y_min, x_mid, y_mid
 
 
 ### distribution data by quadtree
-# num_poi = the minimum number of points in the quadrant
+# num_poi = the minimum number of points in the quadrant = 50
 # the first time using this function points_in = points
-# the first time using this function quadrant = 0
-# structure of bbox_end_poi = [x_max, x_min, y_max, y_min]
+# points_out = output list of points points
+# borders = x_max, x_min, y_max, y_min, x_mid, y_mid
+# quad = na který kvadrant to má zavolat, kvůli znaménkům a výpočtu novýho midu
 
 
-def quadtree_build(points_in, points_out, bbox_end_poi, quadrant, num_poi):
-    if len(points_in) <= num_poi:
-        for poi in points_in:
+def quadtree_build(feat, points_out, len_x, len_y, x_mid, y_mid, rank, quad, num_poi):
+    if len(feat) < num_poi:
+        for poi in feat:
+            poi["properties"]["cluster_id"] = 0
             points_out.append(poi)
         return
 
+    # define a new quadrant and add points into them
+
+    quad_top_left = []
+    quad_top_right = []
+    quad_bottom_left = []
+    quad_bottom_right = []
+
+    for point in feat:
+        coord = point['geometry']['coordinates']
+        if coord[0] < x_mid and coord[1] > y_mid:
+            quad_top_left.append(coord)
+        elif coord[0] > x_mid and coord[1] > y_mid:
+            quad_top_right.append(coord)
+        elif coord[0] < x_mid and coord[1] < y_mid:
+            quad_bottom_left.append(coord)
+        elif coord[0] > x_mid and coord[1] < y_mid:
+            quad_bottom_right.append(coord)
+
+
+    # rekurzivně volám funkci a dávám jí parametr len_x/2 a len_y/2
+
+
+    # quadrant side length
+    # označení kvadrantu
+
+    if quad == 1:
+        # new_x_mid = mid - předchozí +/- dělená vzdálenost
+        nwe_y_mid =
+
+    if quad == 2:
+        new_x_mid =
+        nwe_y_mid =
+
+    quad_3:
+        new_x_mid =
+        nwe_y_mid =
+
+    quad_4:
+        new_x_mid =
+        nwe_y_mid =
+
+    # rekurzivní volání
+    # quadtree_build(rank+1) rekurzvní volání na první kvadrant (bacha na vstupy!)
+    # quadtree_build()
+    # quadtree_build()
+    # quadtree_build()
 
     return points_out
-
