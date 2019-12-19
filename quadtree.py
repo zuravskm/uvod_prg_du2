@@ -79,20 +79,20 @@ def quadtree_build(feat, points_out, half_len_x, half_len_y, x_mid, y_mid, rank,
     # designation of a particular quadrant
 
     if quad == 1:
-        new_x_mid = x_mid - half_len_x
-        nwe_y_mid = y_mid + half_len_y
+        x_mid = x_mid - half_len_x
+        y_mid = y_mid + half_len_y
 
-    if quad == 2:
-        new_x_mid = x_mid + half_len_x
-        nwe_y_mid = y_mid + half_len_y
+    elif quad == 2:
+        x_mid = x_mid + half_len_x
+        y_mid = y_mid + half_len_y
 
-    if quad == 3:
-        new_x_mid = x_mid - half_len_x
-        nwe_y_mid = y_mid - half_len_y
+    elif quad == 3:
+        x_mid = x_mid - half_len_x
+        y_mid = y_mid - half_len_y
 
-    if quad == 4:
-        new_x_mid = x_mid + half_len_x
-        nwe_y_mid = y_mid - half_len_y
+    elif quad == 4:
+        x_mid = x_mid + half_len_x
+        y_mid = y_mid - half_len_y
 
     # recursive calls a function
     # the function gets modified parameters: len_x/2 and len_y/2, rank + 1
