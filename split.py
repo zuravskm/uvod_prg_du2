@@ -18,9 +18,9 @@ print(x_max, x_min, y_max, y_min, x_mid, y_mid)
 
 # than pass to function of quadtree only half of the original length, which then recursively call and divide by 2
 length_bbox_x = fabs(x_max - x_min)
-len_x = length_bbox_x/2
+half_len_x = length_bbox_x/2
 length_bbox_y = fabs(y_max - y_min)
-len_y = length_bbox_y/2
+half_len_y = length_bbox_y/2
 
 
 ### distribution data by quadtree

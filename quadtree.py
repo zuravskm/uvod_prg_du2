@@ -51,7 +51,7 @@ def find_borders_lines(points):
 # for the firts call of quadtree function is quad = 0
 
 
-def quadtree_build(feat, points_out, len_x, len_y, x_mid, y_mid, rank, quad, num_poi):
+def quadtree_build(feat, points_out, half_len_x, half_len_y, x_mid, y_mid, rank, quad, num_poi):
     if len(feat) < num_poi:
         for poi in feat:
             poi["properties"]["cluster_id"] = 0
@@ -76,33 +76,29 @@ def quadtree_build(feat, points_out, len_x, len_y, x_mid, y_mid, rank, quad, num
         elif coord[0] > x_mid and coord[1] < y_mid:
             quad_bottom_right.append(coord)
 
-
-    # rekurzivně volám funkci a dávám jí parametr len_x/2 a len_y/2
-
-
-    # quadrant side length
-    # označení kvadrantu
+    # designation of a particular quadrant
 
     if quad == 1:
-        # new_x_mid = mid - předchozí +/- dělená vzdálenost
-        nwe_y_mid =
+        new_x_mid = x_mid - half_len_x
+        nwe_y_mid = y_mid + half_len_y
 
     if quad == 2:
-        new_x_mid =
-        nwe_y_mid =
+        new_x_mid = x_mid + half_len_x
+        nwe_y_mid = y_mid + half_len_y
 
-    quad_3:
-        new_x_mid =
-        nwe_y_mid =
+    if quad == 3:
+        new_x_mid = x_mid - half_len_x
+        nwe_y_mid = y_mid - half_len_y
 
-    quad_4:
-        new_x_mid =
-        nwe_y_mid =
+    if quad == 4:
+        new_x_mid = x_mid + half_len_x
+        nwe_y_mid = y_mid - half_len_y
 
-    # rekurzivní volání
-    # quadtree_build(rank+1) rekurzvní volání na první kvadrant (bacha na vstupy!)
-    # quadtree_build()
-    # quadtree_build()
-    # quadtree_build()
+    # recursive calls a function
+    # the function gets modified parameters: len_x/2 and len_y/2, rank + 1
+    quadtree_build(quad_top_left, points_out, half_len_x/2, half_len_y/2, x_mid, y_mid, rank+1, quad=1, num_poi=50)
+    quadtree_build(quad_top_right, points_out, half_len_x/2, half_len_y/2, x_mid, y_mid, rank+1, quad=2, num_poi=50)
+    quadtree_build(quad_bottom_left, points_out, half_len_x/2, half_len_y/2, x_mid, y_mid, rank+1, quad=3, num_poi=50)
+    quadtree_build(quad_bottom_right, points_out, half_len_x/2, half_len_y/2, x_mid, y_mid, rank+1, quad=4, num_poi=50)
 
     return points_out
