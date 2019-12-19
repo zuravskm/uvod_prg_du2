@@ -56,7 +56,7 @@ def quadtree_build(feat, points_out, half_len_x, half_len_y, x_mid, y_mid, rank,
         for poi in feat:
             poi["properties"]["cluster_id"] = 0
             points_out.append(poi)
-        return
+        return points_out
 
     # define a new quadrant and add points into them
 
@@ -67,14 +67,15 @@ def quadtree_build(feat, points_out, half_len_x, half_len_y, x_mid, y_mid, rank,
 
     for point in feat:
         coord = point['geometry']['coordinates']
-        if coord[0] < x_mid and coord[1] > y_mid:
-            quad_top_left.append(coord)
-        elif coord[0] > x_mid and coord[1] > y_mid:
-            quad_top_right.append(coord)
-        elif coord[0] < x_mid and coord[1] < y_mid:
-            quad_bottom_left.append(coord)
-        elif coord[0] > x_mid and coord[1] < y_mid:
-            quad_bottom_right.append(coord)
+        coordx, coordy = coord
+        if coordx < x_mid and coordy > y_mid:
+            quad_top_left.append(point)
+        elif coordx > x_mid and coordy > y_mid:
+            quad_top_left.append(point)
+        elif coordx < x_mid and coordy < y_mid:
+            quad_top_left.append(point)
+        elif coordx > x_mid and coordy < y_mid:
+            quad_top_left.append(point)
 
     # designation of a particular quadrant
     # always add or subtract half of the bounding box length depending on the new quadrant
