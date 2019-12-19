@@ -24,10 +24,11 @@ half_len_y = length_bbox_y/2
 
 
 ### distribution data by quadtree
+rank = 0 # if a user entered a list with less than 50 points, they would be given a cluster_id 0
 quad = 0 # for the firts call of quadtree, because it must not recalculate half quadrants, but use the original ones
 num_poi = 50 # minimum number of points in quadrants
 
-# completely_final_list = q.quadtree_build( rank = 0, quad = 0)
+completely_final_list = q.quadtree_build(feat, points_out, half_len_x, half_len_y, x_mid, y_mid, 0, 0, 50)
 # 0 proto, že nechci dělat přepočet midů, ale ty původní pro první volání rekurzivní funkce
 
 
