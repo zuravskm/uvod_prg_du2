@@ -7,13 +7,13 @@ with open("input.geojson", "r", encoding="utf-8") as f:
 
 
 feat = data["features"]
-print(feat)
+# print(feat)
 
 points = q.find_coord(feat)
 # print(points)
 
 x_max, x_min, y_max, y_min, x_mid, y_mid = q.find_borders_lines(points)
-print(x_max, x_min, y_max, y_min, x_mid, y_mid)
+# print(x_max, x_min, y_max, y_min, x_mid, y_mid)
 
 
 # than pass to function of quadtree only half of the original length, which then recursively call and divide by 2
