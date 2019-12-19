@@ -47,7 +47,8 @@ def find_borders_lines(points):
 # the first time using this function points_in = points
 # points_out = output list of points points
 # borders = x_max, x_min, y_max, y_min, x_mid, y_mid
-# quad = na který kvadrant to má zavolat, kvůli znaménkům a výpočtu novýho midu
+# quad = which quadrant to call because of signs and the calculation of the new quadrant half
+# for the firts call of quadtree function is quad = 0
 
 
 def quadtree_build(feat, points_out, len_x, len_y, x_mid, y_mid, rank, quad, num_poi):
