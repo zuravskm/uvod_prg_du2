@@ -34,11 +34,10 @@ num_poi = 50 # minimum number of points in quadrants
 # list for output writing from recursive function
 points_out = []
 
-completely_final_list = q.quadtree_build(feat, points_out, half_len_x, half_len_y, x_mid, y_mid, 0, 0, 50)
+completely_final_list = q.quadtree_build(feat, points_out, half_len_x, half_len_y, x_mid, y_mid, rank, quad, num_poi)
 
 
-### finally saving the output to a new GoeJSON file - this function is use in recursive function
-
+### finally saving the output to a new GoeJSON file
 
 gj_structure = {'type': 'FeatureCollection'}
 gj_structure['features'] = completely_final_list
