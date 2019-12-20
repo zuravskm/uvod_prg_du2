@@ -1,6 +1,6 @@
 from math import fabs
 
-### function for find coordinates
+### function for extract coordinates from data
 
 
 def extract_coord(feats):
@@ -28,7 +28,7 @@ def sort_by_axis(points, axis):
 # output are borders of bounding box: x_max, x_min, y_max, y_min and middle: x_mid, y_mid
 
 
-def find_borders_lines(points):
+def get_bbox(points):
     sort_by_x = sort_by_axis(points, 0)
     x_min = sort_by_x[0][0]
     x_max = sort_by_x[-1][0]

@@ -14,7 +14,7 @@ points = q.extract_coord(feats)
 # only for control
 print(points)
 
-x_max, x_min, y_max, y_min, x_mid, y_mid = q.find_borders_lines(points)
+x_max, x_min, y_max, y_min, x_mid, y_mid = q.get_bbox(points)
 # only for control
 print(x_max, x_min, y_max, y_min, x_mid, y_mid)
 
