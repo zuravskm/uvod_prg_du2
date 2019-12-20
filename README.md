@@ -51,6 +51,5 @@ geometrický střed určen pomocí přičítání, resp. odčítání své nové
 polovině délky kvadrantu předchozího) od geometrického středu předchozího bounding boxu/kvadrantu. 
 Následně je na nové čtyři kvadranty tato funkce rekurzivně volána. 
 
-Koncová podmínka rekurze je, že množina bodů po dělení nesmí obsahovat méně než 50 bodů. 
-Po splnění této podmínky je každému bodu zapsán nový atribut `cluster_id` a body jsou 
-zapsány do výsledného seznamu. 
+Koncová podmínka rekurze: pokud množina bodů po dělení obsahuje méně než 50 bodů, je každému bodu 
+přidán nový atribut `cluster_id` a body jsou zapsány do výsledného seznamu. 
