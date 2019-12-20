@@ -7,13 +7,16 @@ souřadnicemi (atribut `coordinates`). Ke každému bodu navíc přibude atribut
 který určuje, do které skupiny po dělení pomocí quadtree jednotlivé body patří. 
 
 
+
 ## Vstup
 Vstupem je soubor dat s názvem `input.geojson`, který je uložen ve formátu GeoJSON jako 
 FeatureColection bodů. 
 
 
+
 ## Výstup
 Výstup je také uložen ve formátu GeoJSON jako FeatureColection bodů s názvem `output.geojson`.
+
 
 
 ## Metoda quadtree
@@ -23,7 +26,9 @@ Při splnění této podmínky je bodům zapsáno odpovídající cluster_id a d
 Pokud ale podmínka splněna není, množina bodů je dále rekurzivně dělena. 
 
 
+
 ## Popis funkcionality použitých funkcí
+
 
 ### funkce extract_coord:
 Z množiny vstupních dat `feats` vybere pro každý bod jeho x a y souřadnici a uloží je do
