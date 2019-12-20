@@ -52,4 +52,4 @@ polovině délky kvadrantu předchozího) od geometrického středu předchozíh
 Následně je na nové čtyři kvadranty tato funkce rekurzivně volána. 
 
 Koncová podmínka rekurze: pokud množina bodů po dělení obsahuje méně než 50 bodů, je každému bodu 
-přidán nový atribut `cluster_id` a body jsou zapsány do výsledného seznamu. 
+přidán atribut `cluster_id` a body jsou zapsány do výsledného seznamu. 
