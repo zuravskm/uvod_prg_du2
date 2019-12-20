@@ -23,7 +23,7 @@ Při splnění této podmínky je bodům zapsáno odpovídající cluster_id a d
 Pokud ale podmínka splněna není, množina bodů je dále rekurzivně dělena. 
 
 
-## Popis funkcionality definovaných funkcí
+## Popis funkcionality použitých funkcí
 
 ### funkce extract_coord:
 Z množiny vstupních dat `feats` vybere pro každý bod jeho x a y souřadnici a uloží je do
