@@ -16,7 +16,7 @@ FeatureColection bodů.
 Výstup je také uložen ve formátu GeoJSON jako FeatureColection bodů s názvem `output.geojson`.
 
 
-## Použitá metoda quadtree
+## Metoda quadtree
 Kolem vstupní množiny bodů je vytvořen bounding box, který je geometricky dělen na čtvrtiny. 
 Po každém dělení na čtvrtiny je testováno, zda je počet bodů v novém kvadrantu menší než 50.
 Při splnění této podmínky je bodům zapsáno odpovídající cluster_id a dále již nejsou děleny.
