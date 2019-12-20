@@ -36,39 +36,12 @@ def calculate_bbox(feats):
 # rank = for gradually assign an identifier "cluster_id" to points
 
 
-def quadtree_build(feats, points_out, x_min, x_max, y_min, y_max, rank, quad, num_poi):
-    if len(feats) < num_poi:
+def quadtree_build(feats, points_out, half_len_x, half_len_y, x_mid, y_mid, rank, quad):
+    if len(feats) < 50:
         for poi in feats:
             poi["properties"]["cluster_id"] = rank
             points_out.append(poi)
         return points_out
-
-    if quad == 0:
-        # calculate length of bounding box
-        half_len_x = fabs(x_max - x_min)/2
-        half_len_y = fabs(y_max - y_min)/2
-
-        # calculate middle lines for divided quadrants
-        x_mid = fabs(x_max - x_min) / 2
-        y_mid = fabs(y_max - y_min) / 2
-
-    # designation of a particular quadrant
-    # always add or subtract half of the bounding box length depending on the new quadrant
-    elif quad == 1:
-        x_mid = x_mid - half_len_x
-        y_mid = y_mid + half_len_y
-
-    elif quad == 2:
-        x_mid = x_mid + half_len_x
-        y_mid = y_mid + half_len_y
-
-    elif quad == 3:
-        x_mid = x_mid - half_len_x
-        y_mid = y_mid - half_len_y
-
-    elif quad == 4:
-        x_mid = x_mid + half_len_x
-        y_mid = y_mid - half_len_y
 
     # define a new quadrant and add points into them
 
@@ -89,11 +62,30 @@ def quadtree_build(feats, points_out, x_min, x_max, y_min, y_max, rank, quad, nu
         elif coordx > x_mid and coordy < y_mid: # bottom right quadrant
             quad_top_left.append(point)
 
+    # designation of a particular quadrant
+    # always add or subtract half of the bounding box length depending on the new quadrant
+
+    if quad == 1:
+        x_mid = x_mid - half_len_x
+        y_mid = y_mid + half_len_y
+
+    elif quad == 2:
+        x_mid = x_mid + half_len_x
+        y_mid = y_mid + half_len_y
+
+    elif quad == 3:
+        x_mid = x_mid - half_len_x
+        y_mid = y_mid - half_len_y
+
+    elif quad == 4:
+        x_mid = x_mid + half_len_x
+        y_mid = y_mid - half_len_y
+
     # recursive calls a function
     # this recursive function gets modified parameters: len_x/2 and len_y/2, rank + 1
-    quadtree_build(quad_top_left, points_out, half_len_x/2, half_len_y/2, x_mid, y_mid, rank+1, quad=1, num_poi=50)
-    quadtree_build(quad_top_right, points_out, half_len_x/2, half_len_y/2, x_mid, y_mid, rank+1, quad=2, num_poi=50)
-    quadtree_build(quad_bottom_left, points_out, half_len_x/2, half_len_y/2, x_mid, y_mid, rank+1, quad=3, num_poi=50)
-    quadtree_build(quad_bottom_right, points_out, half_len_x/2, half_len_y/2, x_mid, y_mid, rank+1, quad=4, num_poi=50)
+    quadtree_build(quad_top_left, points_out, half_len_x/2, half_len_y/2, x_mid, y_mid, rank+1, quad=1)
+    quadtree_build(quad_top_right, points_out, half_len_x/2, half_len_y/2, x_mid, y_mid, rank+1, quad=2)
+    quadtree_build(quad_bottom_left, points_out, half_len_x/2, half_len_y/2, x_mid, y_mid, rank+1, quad=3)
+    quadtree_build(quad_bottom_right, points_out, half_len_x/2, half_len_y/2, x_mid, y_mid, rank+1, quad=4)
 
     return points_out
