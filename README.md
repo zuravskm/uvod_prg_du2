@@ -37,7 +37,7 @@ samostatného seznamu.
 
 ### funkce calculate_bbox:
 Jejím vstupem je opět `feats`. Tato funkce využívá funkci `extract_coord` pro výběr souřadnic
-bodů. Ze seznamu souřadnic poté vybírá minimální a maximální hodnoty pro každou souřadnici
+bodů. V seznamu souřadnic poté najde minimální a maximální hodnoty pro každou souřadnici
 zvlášť. Výstupem jsou tyto min a max hodnoty. 
 
 
