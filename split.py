@@ -10,13 +10,9 @@ feats = data["features"]
 # only for control
 print(feats)
 
-points = q.extract_coord(feats)
+x_max, x_min, y_max, y_min = q.calculate_bbox(feats)
 # only for control
-print(points)
-
-x_max, x_min, y_max, y_min, x_mid, y_mid = q.get_bbox(points)
-# only for control
-print(x_max, x_min, y_max, y_min, x_mid, y_mid)
+print(x_max, x_min, y_max, y_min)
 
 
 # than pass to function of quadtree only half of the original length, which then recursively call and divide by 2
