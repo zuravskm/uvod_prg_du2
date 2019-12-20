@@ -3,9 +3,9 @@ from math import fabs
 ### function for find coordinates
 
 
-def find_coord(feat):
+def extract_coord(feats):
     points_list = []
-    for point in feat:
+    for point in feats:
         coord = point['geometry']['coordinates']
         # print(coord)
         points_list.append(coord)
@@ -50,9 +50,9 @@ def find_borders_lines(points):
 # rank = for gradually assign an identifier "cluster_id" to points
 
 
-def quadtree_build(feat, points_out, half_len_x, half_len_y, x_mid, y_mid, rank, quad, num_poi):
-    if len(feat) < num_poi:
-        for poi in feat:
+def quadtree_build(feats, points_out, half_len_x, half_len_y, x_mid, y_mid, rank, quad, num_poi):
+    if len(feats) < num_poi:
+        for poi in feats:
             poi["properties"]["cluster_id"] = rank
             points_out.append(poi)
         return points_out
@@ -64,7 +64,7 @@ def quadtree_build(feat, points_out, half_len_x, half_len_y, x_mid, y_mid, rank,
     quad_bottom_left = []
     quad_bottom_right = []
 
-    for point in feat:
+    for point in feats:
         coord = point['geometry']['coordinates']
         coordx, coordy = coord
         if coordx < x_mid and coordy > y_mid: # top left quadrant

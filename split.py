@@ -6,11 +6,11 @@ with open("input.geojson", "r", encoding="utf-8") as f:
     data = json.load(f)
 
 
-feat = data["features"]
+feats = data["features"]
 # only for control
-print(feat)
+print(feats)
 
-points = q.find_coord(feat)
+points = q.extract_coord(feats)
 # only for control
 print(points)
 
@@ -34,7 +34,7 @@ num_poi = 50 # minimum number of points in quadrants
 # list for output writing from recursive function
 points_out = []
 
-completely_final_list = q.quadtree_build(feat, points_out, half_len_x, half_len_y, x_mid, y_mid, rank, quad, num_poi)
+completely_final_list = q.quadtree_build(feats, points_out, half_len_x, half_len_y, x_mid, y_mid, rank, quad, num_poi)
 
 
 ### finally saving the output to a new GoeJSON file
