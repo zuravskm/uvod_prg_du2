@@ -1,6 +1,8 @@
 from math import fabs
 
 ### function for extract coordinates from data
+# input = feats (set of entry points)
+# output = only x,y coordinates for each point
 
 
 def extract_coord(feats):
@@ -15,7 +17,7 @@ def extract_coord(feats):
 
 
 ### find borders of bounding box
-# input are points
+# input are feats
 # output are borders of bounding box: x_max, x_min, y_max, y_min
 
 
