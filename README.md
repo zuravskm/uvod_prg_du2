@@ -49,7 +49,7 @@ Funkce má za úkol geometricky dělit data na čtvrtiny. Pomocí geometrického
 bounding boxu jsou zde definovány nové 4 kvadranty. Každý nový kvadrant po dělení má svůj 
 geometrický střed určen pomocí přičítání, resp. odčítání své nové délky (která se rovná 
 polovině délky kvadrantu předchozího) od geometrického středu předchozího bounding boxu/kvadrantu. 
-Následně je na nové čtyři kvadranty tato rekurzivně funkce volána. 
+Následně je na nové čtyři kvadranty tato funkce rekurzivně volána. 
 
 Koncová podmínka rekurze je, že množina bodů po dělení nesmí obsahovat méně než 50 bodů. 
 Po splnění této podmínky je každému bodu zapsán nový atribut `cluster_id` a body jsou 
