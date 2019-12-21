@@ -12,7 +12,7 @@ def draw_input_points(feats, bbox):
         coord = point['geometry']['coordinates']
         coordinates.append(coord)
 
-    turtle.setworldcoordinates(bbox[0], bbox[2], bbox[1], bbox[3])  # adjust the screen size using the endpoints
+    turtle.setworldcoordinates(bbox[0], bbox[2], bbox[1], bbox[3])  # adjusting the screen size using the endpoints
     turtle.speed(0)  # drawing speed
     turtle.hideturtle()  # symbol for turtle is not visible
     turtle.tracer(50, 1) # to speed up the drawing, 50 = only every 50 regular screen update is actually performed
@@ -20,7 +20,7 @@ def draw_input_points(feats, bbox):
         turtle.up() # no drawing when turtle moving
         turtle.setposition(coordinates[poi][0], coordinates[poi][1])  # turtle position at the beginning of drawing
         turtle.down() # drawing when turtle moving
-        turtle.dot(6, "green")  # drawing dot
+        turtle.dot(6, "green")  # drawing dot (dot size, dot color)
 
 
 ### draw sides of the bounding box and lines of its recursive division into sub-quadrants
