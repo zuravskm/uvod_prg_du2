@@ -10,6 +10,7 @@ with open("input.geojson", "r", encoding="utf-8") as f:
 
 ### select attribute "features" from input file
 feats = data["features"]
+# feats = feats['properties']['cluster_id']
 # only for control
 print(feats)
 print(len(feats))
@@ -31,12 +32,12 @@ y_mid = (y_max + y_min)/2
 
 ### distribution data by quadtree
 quad = 0 # for the firts call of quadtree, because it must not recalculate half quadrants, but use the original ones
-cluster = 0
+cluster_counter = [0]
 
 # list for output writing from recursive function
 points_out = []
 
-points_out = q.quadtree_build(feats, points_out, half_len_x, half_len_y, x_mid, y_mid, cluster, quad)
+points_out = q.quadtree_build(feats, points_out, half_len_x, half_len_y, x_mid, y_mid, cluster_counter, quad)
 
 # only for control
 print(len(points_out))

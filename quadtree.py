@@ -36,11 +36,12 @@ def calculate_bbox(feats):
 # for the firts call of quadtree function is quad = 0
 
 
-def quadtree_build(feats, points_out, half_len_x, half_len_y, x_mid, y_mid, cluster=0, quad=0):
+def quadtree_build(feats, points_out, half_len_x, half_len_y, x_mid, y_mid, cluster_counter, quad=0):
     if len(feats) < 50:
+        cluster_counter[0] = cluster_counter[0] + 1
         for poi in feats:
-            poi['properties']['cluster_id'] = cluster
-            points_out.append(poi)
+            feats[poi]['properties']['cluster_id'] = cluster_counter
+            points_out.append(feats[poi])
         return points_out
 
     # designation of a particular quadrant
@@ -49,22 +50,18 @@ def quadtree_build(feats, points_out, half_len_x, half_len_y, x_mid, y_mid, clus
     if quad == 1: # top left quadrant
         x_mid = x_mid - half_len_x
         y_mid = y_mid + half_len_y
-        cluster = cluster + 1
 
     elif quad == 2: # top right quadrant
         x_mid = x_mid + half_len_x
         y_mid = y_mid + half_len_y
-        cluster = cluster + 1
 
     elif quad == 3: # bottom left quadrant
         x_mid = x_mid - half_len_x
         y_mid = y_mid - half_len_y
-        cluster = cluster + 1
 
     elif quad == 4: # bottom right quadrant
         x_mid = x_mid + half_len_x
         y_mid = y_mid - half_len_y
-        cluster = cluster + 1
 
     # define a new quadrant and add points into them
 
@@ -88,9 +85,9 @@ def quadtree_build(feats, points_out, half_len_x, half_len_y, x_mid, y_mid, clus
 
     # recursive calls of function
     # this recursive function gets modified parameters: len_x/2 and len_y/2
-    quadtree_build(quad_top_left, points_out, half_len_x/2, half_len_y/2, x_mid, y_mid, cluster, quad=1)
-    quadtree_build(quad_top_right, points_out, half_len_x/2, half_len_y/2, x_mid, y_mid, cluster, quad=2)
-    quadtree_build(quad_bottom_left, points_out, half_len_x/2, half_len_y/2, x_mid, y_mid, cluster, quad=3)
-    quadtree_build(quad_bottom_right, points_out, half_len_x/2, half_len_y/2, x_mid, y_mid, cluster, quad=4)
+    quadtree_build(quad_top_left, points_out, half_len_x/2, half_len_y/2, x_mid, y_mid, cluster_counter, quad=1)
+    quadtree_build(quad_top_right, points_out, half_len_x/2, half_len_y/2, x_mid, y_mid, cluster_counter, quad=2)
+    quadtree_build(quad_bottom_left, points_out, half_len_x/2, half_len_y/2, x_mid, y_mid, cluster_counter, quad=3)
+    quadtree_build(quad_bottom_right, points_out, half_len_x/2, half_len_y/2, x_mid, y_mid, cluster_counter, quad=4)
 
     return points_out
