@@ -23,12 +23,15 @@ Výstup je také uložen ve formátu GeoJSON jako FeatureColection bodů s názv
 Kolem vstupní množiny bodů je vytvořen bounding box, který je geometricky dělen na čtvrtiny. 
 Po každém dělení na čtvrtiny je testováno, zda je počet bodů v novém kvadrantu menší než 50.
 Pokud podmínka splněna není, množina bodů je dále rekurzivně dělena. V případě, že podmínka 
-splněna je, jsou body zapsány do výsledného seznamu  `points_out `.
+splněna je, je bodům přidán atribut `cluster_id ` a jsou zapsány do výsledného seznamu  `points_out `.
 
-Přidávání atributu  `cluster_id ` je realizováno pomocí zanoření se do původního seznamu bodů
-a přidání nového atrubutu. Při cyklu, který prochází body a zkoumá jejich náležitost k nově 
-vytvořeným kavdrantům, je pak bodům v novém kvadrantu přidáno číslo do atributu  `cluster_id ` 
-odpovídající příslušnému kvadrantu.
+Přidávání atributu  `cluster_id ` je realizováno pomocí definování pomocného seznamu, který má 
+pouze jeden prvek na začátku rovný 0. Při testování koncové podmínky rekurze je poté z tohoto 
+seznamu hodnota vybrána a zapsána bodům splňujícím danou podmínku. Hned poté je zapsaná hodnota
+z pomocného seznamu odstraněna a uložena do pomocné proměnné, která je následně do seznamu opět
+vrácena, ale je již zvětšena o 1. Toto se opakuje při každém zapsání nové skupiny bodů, která 
+splňuje koncovou podmínku rekurze. Proto každá skupina méně než 50 bodů obsahuje 
+jedinečné `cluster_id ` .
 
 
 ## Popis funkcionality použitých funkcí
@@ -47,13 +50,12 @@ najde minimální a maximální hodnoty pro každou souřadnici zvlášť
 
 
 _funkce quadtree_build_
-- této funkci je předána vstupní množina bodů `feats`, polovina délky bounding boxu ve směru 
-osy x i y, goemtrický střed bounding boxu a číslo kvadrantu
+- této funkci je předána vstupní množina bodů `feats`, seznam pro zápis výsledných bobů, krajní 
+hodnoty bounding boxu, pomocný seznam pro přidávání `cluster_id ` 
 - funkce má za úkol geometricky dělit data na čtvrtiny
-- pomocí geometrického středu původního bounding boxu jsou zde definovány nové 4 kvadranty
-- každý nový kvadrant po dělení má svůj geometrický střed určen pomocí přičítání, resp. odčítání své 
-nové délky (která se rovná polovině délky kvadrantu předchozího) od geometrického středu předchozího bounding boxu/kvadrantu
-- přitom je bodům také přidán nový atribut  `cluster_id ` 
-- následně je na nové čtyři kvadranty tato funkce rekurzivně volána
-- koncová podmínka rekurze: pokud množina bodů po dělení obsahuje méně než 50 bodů, jsou body jsou 
-zapsány do výsledného seznamu  `points_out `
+- ve funkci je počítán střed bounding boxu z jeho krajních hodnot
+- následně jsou určeny krajní hodnoty 4 nových kvadrantů vzniklých po dělení původního bounding boxu
+- poté jsou vytvořeny nové seznamy pro body spadající do 4 nových kvadrantů
+- na nové čtyři kvadranty tato funkce rekurzivně volána
+- koncová podmínka rekurze: pokud množina bodů po dělení obsahuje méně než 50 bodů, je bodům přidán
+nový atribut  `cluster_id ` jsou body jsou zapsány do výsledného seznamu  `points_out `
