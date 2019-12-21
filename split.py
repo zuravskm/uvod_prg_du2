@@ -1,5 +1,7 @@
 import json
+import turtle
 import quadtree as q
+from drawing import draw_input_points
 
 
 ### open and load input file
@@ -18,6 +20,11 @@ print(len(feats))
 bbox = q.calculate_bbox(feats)
 # only for control
 print(bbox)
+
+### turtle drawing - draw all input points
+
+
+draw_input_points(feats, bbox)
 
 
 ### distribution data by quadtree
@@ -38,3 +45,5 @@ gj_structure = {'type': 'FeatureCollection'}
 gj_structure['features'] = points_out
 with open("output.geojson", "w", encoding="utf-8") as f:
     json.dump(gj_structure, f, indent=2, ensure_ascii=False)
+
+turtle.exitonclick()

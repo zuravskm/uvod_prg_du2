@@ -1,4 +1,4 @@
-from math import fabs
+from drawing import draw_bbox
 
 ### function for extract coordinates from data
 # inputs = feats (set of entry points)
@@ -18,7 +18,7 @@ def extract_coord(feats):
 
 ### find borders of bounding box
 # inputs are feats
-# outputs are borders of bounding box: x_max, x_min, y_max, y_min
+# outputs are borders of bounding box: x_min, x_max, y_min, y_max
 
 
 def calculate_bbox(feats):
@@ -38,6 +38,7 @@ def calculate_bbox(feats):
 
 def quadtree_build(feats, points_out, bbox, cluster_counter):
     if len(feats) < 50:
+        # draw_bbox(bbox) # draw sides of the last quadrants
         cluster = cluster_counter[0]
         for poi in feats:
             poi['properties']['cluster_id'] = cluster
@@ -73,6 +74,9 @@ def quadtree_build(feats, points_out, bbox, cluster_counter):
             quad_bottom_left.append(point)
         elif coordx >= mid[0] and coordy < mid[1]: # bottom right quadrant
             quad_bottom_right.append(point)
+
+    # draw sides of the bounding box and quadrants
+    draw_bbox(bbox)
 
     # recursive calls of function
     quadtree_build(quad_top_left, points_out, bbox_quad_1, cluster_counter)
