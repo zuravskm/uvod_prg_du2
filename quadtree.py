@@ -42,10 +42,9 @@ def quadtree_build(feats, points_out, half_len_x, half_len_y, x_mid, y_mid, clus
         for poi in feats:
             poi['properties']['cluster_id'] = cluster
             points_out.append(poi)
+        cluster_new = cluster_counter.pop()
+        cluster_counter.append(cluster_new + 1)
         return points_out
-
-    cluster_new = cluster_counter.pop()
-    cluster_counter.append(cluster_new + 1)
 
     # designation of a particular quadrant
     # always add or subtract half of the bounding box length depending on the new quadrant
