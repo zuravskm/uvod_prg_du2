@@ -12,14 +12,14 @@ def draw_input_points(feats, bbox):
         coord = point['geometry']['coordinates']
         coordinates.append(coord)
 
-    turtle.setworldcoordinates(bbox[0], bbox[2], bbox[1], bbox[3])  # adjusting the screen size using the endpoints
+    turtle.setworldcoordinates(bbox[0], bbox[2], bbox[1], bbox[3])  # adjusting the screen size using endpoints
     turtle.speed(0)  # drawing speed
     turtle.hideturtle()  # symbol for turtle is not visible
     turtle.tracer(50, 1) # to speed up the drawing, 50 = only every 50 regular screen update is actually performed
-    for poi in range(len(coordinates)):
-        turtle.up() # no drawing when turtle moving
-        turtle.setposition(coordinates[poi][0], coordinates[poi][1])  # turtle position at the beginning of drawing
-        turtle.down() # drawing when turtle moving
+    for point in range(len(coordinates)):
+        turtle.penup() # no drawing when turtle moving
+        turtle.setposition(coordinates[point][0], coordinates[point][1])  # turtle position at the beginning of drawing
+        turtle.pendown() # drawing when turtle moving
         turtle.dot(6, "green")  # drawing dot (dot size, dot color)
 
 
@@ -32,8 +32,8 @@ def draw_bbox(bbox):
     turtle.speed(0)
     turtle.hideturtle()
     turtle.penup()
-    turtle.setpos(x_min, y_min) # turtle position at the beginning of drawing
-    turtle.down()
+    turtle.setposition(x_min, y_min) # turtle position at the beginning of drawing
+    turtle.pendown()
     turtle.forward(fabs(x_max - x_min)) # bottom side of the bounding box
     turtle.left(90)
     turtle.forward(fabs(y_max - y_min)) # right side of the bounding box
