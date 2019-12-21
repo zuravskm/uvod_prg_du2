@@ -31,14 +31,15 @@ Pokud ale podmínka splněna není, množina bodů je dále rekurzivně dělena.
 
 
 _funkce extract_coord_
-- Z množiny vstupních dat `feats` vybere pro každý bod jeho x a y souřadnici a uloží je do
-samostatného seznamu. 
+- z množiny vstupních dat `feats` vybere pro každý bod jeho x a y souřadnici a uloží je do
+samostatného seznamu
 
 
 _funkce calculate_bbox_
-- Jejím vstupem je opět `feats`. Tato funkce využívá funkci `extract_coord` pro výběr souřadnic
-bodů. V seznamu souřadnic poté najde minimální a maximální hodnoty pro každou souřadnici
-zvlášť. Výstupem jsou tyto min a max hodnoty. 
+- jejím vstupem je opět `feats`
+- tato funkce využívá funkci `extract_coord` pro výběr souřadnic bodů; v seznamu souřadnic poté 
+najde minimální a maximální hodnoty pro každou souřadnici zvlášť
+- výstupem jsou tyto min a max hodnoty
 
 
 _funkce quadtree_build_
