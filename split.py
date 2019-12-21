@@ -18,8 +18,8 @@ print(x_max, x_min, y_max, y_min)
 # than pass to function of quadtree only half of the original length, which then recursively call and divide by 2
 half_len_x = fabs(x_max - x_min)/2
 half_len_y = fabs(y_max - y_min)/2
-x_mid = fabs(x_max - x_min)/2
-y_mid = fabs(y_max - y_min)/2
+x_mid = (x_max + x_min)/2
+y_mid = (y_max + y_min)/2
 
 ### distribution data by quadtree
 rank = 0 # if a user entered a list with less than 50 points, they would be given a cluster_id 0
