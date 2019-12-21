@@ -38,7 +38,7 @@ def calculate_bbox(feats):
 
 def quadtree_build(feats, points_out, bbox, cluster_counter):
     if len(feats) < 50:
-        # draw_bbox(bbox) # draw sides of the last quadrants
+        draw_bbox(bbox) # draw sides of the last quadrants
         cluster = cluster_counter[0]
         for poi in feats:
             poi['properties']['cluster_id'] = cluster
