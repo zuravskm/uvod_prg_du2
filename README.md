@@ -26,9 +26,9 @@ Pokud podmínka splněna není, množina bodů je dále rekurzivně dělena. V p
 splněna je, jsou body zapsány do výsledného seznamu  `points_out `.
 
 Přidávání atributu  `cluster_id ` je realizováno pomocí zanoření se do původního seznamu bodů
-a přidání zatím prázdného atrubutu. Při cyklu, který prochází body a zkoumá jejich náležitost
-k nově vytvořeným kavdrantům je pak bodům v novém kvadrantu připočteno číslo do atributu  
-`cluster_id ` odpovídající danému kvadrantu.
+a přidání nového atrubutu. Při cyklu, který prochází body a zkoumá jejich náležitost k nově 
+vytvořeným kavdrantům, je pak bodům v novém kvadrantu přidáno číslo do atributu  `cluster_id ` 
+odpovídající příslušnému kvadrantu.
 
 
 ## Popis funkcionality použitých funkcí
