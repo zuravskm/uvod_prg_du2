@@ -38,11 +38,14 @@ def calculate_bbox(feats):
 
 def quadtree_build(feats, points_out, half_len_x, half_len_y, x_mid, y_mid, cluster_counter, quad=0):
     if len(feats) < 50:
-        cluster_counter[0] = cluster_counter[0] + 1
+        cluster = cluster_counter[0]
         for poi in feats:
-            feats[poi]['properties']['cluster_id'] = cluster_counter
-            points_out.append(feats[poi])
+            poi['properties']['cluster_id'] = cluster
+            points_out.append(poi)
         return points_out
+
+    cluster_new = cluster_counter.pop()
+    cluster_counter.append(cluster_new + 1)
 
     # designation of a particular quadrant
     # always add or subtract half of the bounding box length depending on the new quadrant
