@@ -22,9 +22,12 @@ Výstup je také uložen ve formátu GeoJSON jako FeatureColection bodů s názv
 ## Metoda quadtree
 Kolem vstupní množiny bodů je vytvořen bounding box, který je geometricky dělen na čtvrtiny. 
 Po každém dělení na čtvrtiny je testováno, zda je počet bodů v novém kvadrantu menší než 50.
-Při splnění této podmínky je bodům zapsáno odpovídající cluster_id a dále již nejsou děleny.
 Pokud ale podmínka splněna není, množina bodů je dále rekurzivně dělena. 
 
+Přidávání atributu  `cluster_id ` je realizováno pomocí zanoření se do původního seznamu bodů
+a přidání zatím prázdného atrubutu. Při cyklu, který prochází body a zkoumá jejich náležitost
+k nově vytvořeným kavdrantům je pak bodům v novém kvadrantu připočteno číslo do atributu  
+`cluster_id ` odpovídající danému kvadrantu.
 
 
 ## Popis funkcionality použitých funkcí
