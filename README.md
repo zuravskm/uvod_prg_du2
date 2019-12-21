@@ -30,18 +30,18 @@ Pokud ale podmínka splněna není, množina bodů je dále rekurzivně dělena.
 ## Popis funkcionality použitých funkcí
 
 
-- _funkce extract_coord_**
+- _funkce extract_coord_
 Z množiny vstupních dat `feats` vybere pro každý bod jeho x a y souřadnici a uloží je do
 samostatného seznamu. 
 
 
-- _funkce calculate_bbox_**
+- _funkce calculate_bbox_
 Jejím vstupem je opět `feats`. Tato funkce využívá funkci `extract_coord` pro výběr souřadnic
 bodů. V seznamu souřadnic poté najde minimální a maximální hodnoty pro každou souřadnici
 zvlášť. Výstupem jsou tyto min a max hodnoty. 
 
 
-- _funkce quadtree_build_**
+- _funkce quadtree_build_
 Této funkci je předána vstupní množina bodů `feats`, polovina délky bounding boxu ve směru 
 osy x i y, goemtrický střed bounding boxu, pořadí pro zápis `cluster_id` a číslo kvadrantu. 
 
