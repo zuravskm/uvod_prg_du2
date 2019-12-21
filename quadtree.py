@@ -46,9 +46,7 @@ def quadtree_build(feats, points_out, bbox, cluster_counter):
         cluster_counter.append(cluster_new + 1)
         return points_out
 
-    # calculate the center and borders of the bounding box
-    half_len_x = fabs(bbox[1] - bbox[0]) / 2
-    half_len_y = fabs(bbox[3] - bbox[2]) / 2
+    # calculate the center of the bounding box
     mid = [(bbox[1] + bbox[0]) / 2, (bbox[3] + bbox[2]) / 2]
 
     # counting new min and max values of new quadrant
