@@ -1,4 +1,4 @@
-import json, turtle
+import json
 import quadtree as q
 from math import fabs
 
@@ -31,11 +31,12 @@ y_mid = (y_max + y_min)/2
 
 ### distribution data by quadtree
 quad = 0 # for the firts call of quadtree, because it must not recalculate half quadrants, but use the original ones
+cluster = 0
 
 # list for output writing from recursive function
 points_out = []
 
-points_out = q.quadtree_build(feats, points_out, half_len_x, half_len_y, x_mid, y_mid, quad)
+points_out = q.quadtree_build(feats, points_out, half_len_x, half_len_y, x_mid, y_mid, cluster, quad)
 
 # only for control
 print(len(points_out))
