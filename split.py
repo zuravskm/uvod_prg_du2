@@ -36,4 +36,4 @@ points_out = q.quadtree_build(feats, points_out, half_len_x, half_len_y, x_mid, 
 gj_structure = {'type': 'FeatureCollection'}
 gj_structure['features'] = points_out
 with open("output.geojson", "w", encoding="utf-8") as f:
-    points_out.dump(gj_structure, f, indent=2, ensure_ascii=False)
+    json.dump(gj_structure, f, indent=2, ensure_ascii=False)
