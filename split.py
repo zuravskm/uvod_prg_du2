@@ -22,13 +22,13 @@ x_mid = (x_max + x_min)/2
 y_mid = (y_max + y_min)/2
 
 ### distribution data by quadtree
-rank = 0 # if a user entered a list with less than 50 points, they would be given a cluster_id 0
+# rank = 0 # if a user entered a list with less than 50 points, they would be given a cluster_id 0
 quad = 0 # for the firts call of quadtree, because it must not recalculate half quadrants, but use the original ones
 
 # list for output writing from recursive function
 points_out = []
 
-points_out = q.quadtree_build(feats, points_out, half_len_x, half_len_y, x_mid, y_mid, rank, quad)
+points_out = q.quadtree_build(feats, points_out, half_len_x, half_len_y, x_mid, y_mid, quad)
 
 
 ### finally saving the output to a new GoeJSON file
