@@ -23,14 +23,14 @@ Výstup je také uložen ve formátu GeoJSON jako FeatureColection bodů s názv
 Kolem vstupní množiny bodů je vytvořen bounding box, který je geometricky dělen na čtvrtiny. 
 Po každém dělení na čtvrtiny je testováno, zda je počet bodů v novém kvadrantu menší než 50.
 Pokud podmínka splněna není, množina bodů je dále rekurzivně dělena. V případě, že podmínka 
-splněna je, je bodům přidán atribut `cluster_id ` a jsou zapsány do výsledného seznamu  `points_out `.
+je splněna, je bodům přidán atribut `cluster_id ` a jsou zapsány do výsledného seznamu  `points_out `.
 
 Přidávání atributu  `cluster_id ` je realizováno pomocí definování pomocného seznamu, který má 
 pouze jeden prvek na začátku rovný 0. Při testování koncové podmínky rekurze je poté z tohoto 
 seznamu hodnota vybrána a zapsána bodům splňujícím danou podmínku. Hned poté je zapsaná hodnota
 z pomocného seznamu odstraněna a uložena do pomocné proměnné, která je následně do seznamu opět
-vrácena, ale je již zvětšena o 1. Toto se opakuje při každém zapsání nové skupiny bodů, která 
-splňuje koncovou podmínku rekurze. Proto každá skupina méně než 50 bodů obsahuje 
+vrácena, ale je již s hodnotou o 1 větší. Toto se opakuje při každém zapsání nové skupiny bodů, 
+která splňuje koncovou podmínku rekurze. Proto každá skupina méně než 50 bodů obsahuje 
 jedinečné `cluster_id ` .
 
 
