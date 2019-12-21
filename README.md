@@ -43,14 +43,13 @@ najde minimální a maximální hodnoty pro každou souřadnici zvlášť
 
 
 _funkce quadtree_build_
-- Této funkci je předána vstupní množina bodů `feats`, polovina délky bounding boxu ve směru 
-osy x i y, goemtrický střed bounding boxu, pořadí pro zápis `cluster_id` a číslo kvadrantu. 
-
-Funkce má za úkol geometricky dělit data na čtvrtiny. Pomocí geometrického středu původního 
-bounding boxu jsou zde definovány nové 4 kvadranty. Každý nový kvadrant po dělení má svůj 
-geometrický střed určen pomocí přičítání, resp. odčítání své nové délky (která se rovná 
-polovině délky kvadrantu předchozího) od geometrického středu předchozího bounding boxu/kvadrantu. 
-Následně je na nové čtyři kvadranty tato funkce rekurzivně volána. 
-
-Koncová podmínka rekurze: pokud množina bodů po dělení obsahuje méně než 50 bodů, je každému bodu 
-přidán atribut `cluster_id` a body jsou zapsány do výsledného seznamu. 
+- této funkci je předána vstupní množina bodů `feats`, polovina délky bounding boxu ve směru 
+osy x i y, goemtrický střed bounding boxu, pořadí pro zápis `cluster_id` a číslo kvadrantu
+- funkce má za úkol geometricky dělit data na čtvrtiny
+- pomocí geometrického středu původního bounding boxu jsou zde definovány nové 4 kvadranty
+- každý nový kvadrant po dělení má svůj geometrický střed určen pomocí přičítání, resp. odčítání své 
+nové délky (která se rovná polovině délky kvadrantu předchozího) od geometrického středu předchozího 
+bounding boxu/kvadrantu
+- následně je na nové čtyři kvadranty tato funkce rekurzivně volána
+- koncová podmínka rekurze: pokud množina bodů po dělení obsahuje méně než 50 bodů, je každému bodu 
+přidán atribut `cluster_id` a body jsou zapsány do výsledného seznamu
