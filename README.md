@@ -22,9 +22,13 @@ Výstup je také uložen ve formátu GeoJSON jako FeatureColection bodů s názv
 ## Metoda quadtree
 Kolem vstupní množiny bodů je vytvořen bounding box, který je geometricky dělen na čtvrtiny. 
 Po každém dělení na čtvrtiny je testováno, zda je počet bodů v novém kvadrantu menší než 50.
-Při splnění této podmínky je bodům zapsáno odpovídající cluster_id a dále již nejsou děleny.
-Pokud ale podmínka splněna není, množina bodů je dále rekurzivně dělena. 
+Pokud podmínka splněna není, množina bodů je dále rekurzivně dělena. V případě, že podmínka 
+splněna je, jsou body zapsány do výsledného seznamu  `points_out `.
 
+Přidávání atributu  `cluster_id ` je realizováno pomocí zanoření se do původního seznamu bodů
+a přidání nového atrubutu. Při cyklu, který prochází body a zkoumá jejich náležitost k nově 
+vytvořeným kavdrantům, je pak bodům v novém kvadrantu přidáno číslo do atributu  `cluster_id ` 
+odpovídající příslušnému kvadrantu.
 
 
 ## Popis funkcionality použitých funkcí
@@ -44,12 +48,12 @@ najde minimální a maximální hodnoty pro každou souřadnici zvlášť
 
 _funkce quadtree_build_
 - této funkci je předána vstupní množina bodů `feats`, polovina délky bounding boxu ve směru 
-osy x i y, goemtrický střed bounding boxu, pořadí pro zápis `cluster_id` a číslo kvadrantu
+osy x i y, goemtrický střed bounding boxu a číslo kvadrantu
 - funkce má za úkol geometricky dělit data na čtvrtiny
 - pomocí geometrického středu původního bounding boxu jsou zde definovány nové 4 kvadranty
 - každý nový kvadrant po dělení má svůj geometrický střed určen pomocí přičítání, resp. odčítání své 
-nové délky (která se rovná polovině délky kvadrantu předchozího) od geometrického středu předchozího 
-bounding boxu/kvadrantu
+nové délky (která se rovná polovině délky kvadrantu předchozího) od geometrického středu předchozího bounding boxu/kvadrantu
+- přitom je bodům také přidán nový atribut  `cluster_id ` 
 - následně je na nové čtyři kvadranty tato funkce rekurzivně volána
-- koncová podmínka rekurze: pokud množina bodů po dělení obsahuje méně než 50 bodů, je každému bodu 
-přidán atribut `cluster_id` a body jsou zapsány do výsledného seznamu
+- koncová podmínka rekurze: pokud množina bodů po dělení obsahuje méně než 50 bodů, jsou body jsou 
+zapsány do výsledného seznamu  `points_out `
