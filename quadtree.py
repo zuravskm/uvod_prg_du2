@@ -2,7 +2,7 @@ from math import fabs
 
 ### function for extract coordinates from data
 # input = feats (set of entry points)
-# output = only x,y coordinates for each point
+# output = only list of x,y coordinates for each point
 
 
 def extract_coord(feats):
@@ -45,6 +45,25 @@ def quadtree_build(feats, points_out, half_len_x, half_len_y, x_mid, y_mid, rank
             points_out.append(poi)
         return points_out
 
+    # designation of a particular quadrant
+    # always add or subtract half of the bounding box length depending on the new quadrant
+
+    if quad == 1: # top left quadrant
+        x_mid = x_mid - half_len_x
+        y_mid = y_mid + half_len_y
+
+    elif quad == 2: # top right quadrant
+        x_mid = x_mid + half_len_x
+        y_mid = y_mid + half_len_y
+
+    elif quad == 3: # bottom left quadrant
+        x_mid = x_mid - half_len_x
+        y_mid = y_mid - half_len_y
+
+    elif quad == 4: # bottom right quadrant
+        x_mid = x_mid + half_len_x
+        y_mid = y_mid - half_len_y
+
     # define a new quadrant and add points into them
 
     quad_top_left = []
@@ -54,34 +73,16 @@ def quadtree_build(feats, points_out, half_len_x, half_len_y, x_mid, y_mid, rank
 
     for point in feats:
         coord = point['geometry']['coordinates']
-        coordx, coordy = coord
-        if coordx < x_mid and coordy > y_mid: # top left quadrant
+        coordx = coord[0]
+        coordy = coord[1]
+        if coordx <= x_mid and coordy > y_mid: # top left quadrant
             quad_top_left.append(point)
-        elif coordx > x_mid and coordy > y_mid: # top right quadrant
+        elif coordx > x_mid and coordy >= y_mid: # top right quadrant
             quad_top_left.append(point)
-        elif coordx < x_mid and coordy < y_mid: # bottom left quadrant
+        elif coordx < x_mid and coordy <= y_mid: # bottom left quadrant
             quad_top_left.append(point)
-        elif coordx > x_mid and coordy < y_mid: # bottom right quadrant
+        elif coordx >= x_mid and coordy < y_mid: # bottom right quadrant
             quad_top_left.append(point)
-
-    # designation of a particular quadrant
-    # always add or subtract half of the bounding box length depending on the new quadrant
-
-    if quad == 1:
-        x_mid = x_mid - half_len_x
-        y_mid = y_mid + half_len_y
-
-    elif quad == 2:
-        x_mid = x_mid + half_len_x
-        y_mid = y_mid + half_len_y
-
-    elif quad == 3:
-        x_mid = x_mid - half_len_x
-        y_mid = y_mid - half_len_y
-
-    elif quad == 4:
-        x_mid = x_mid + half_len_x
-        y_mid = y_mid - half_len_y
 
     # recursive calls a function
     # this recursive function gets modified parameters: len_x/2 and len_y/2, rank + 1
