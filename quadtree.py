@@ -78,11 +78,11 @@ def quadtree_build(feats, points_out, half_len_x, half_len_y, x_mid, y_mid, rank
         if coordx <= x_mid and coordy > y_mid: # top left quadrant
             quad_top_left.append(point)
         elif coordx > x_mid and coordy >= y_mid: # top right quadrant
-            quad_top_left.append(point)
+            quad_top_right.append(point)
         elif coordx < x_mid and coordy <= y_mid: # bottom left quadrant
-            quad_top_left.append(point)
+            quad_bottom_left.append(point)
         elif coordx >= x_mid and coordy < y_mid: # bottom right quadrant
-            quad_top_left.append(point)
+            quad_bottom_right.append(point)
 
     # recursive calls a function
     # this recursive function gets modified parameters: len_x/2 and len_y/2, rank + 1
