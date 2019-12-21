@@ -22,7 +22,6 @@ x_mid = (x_max + x_min)/2
 y_mid = (y_max + y_min)/2
 
 ### distribution data by quadtree
-# rank = 0 # if a user entered a list with less than 50 points, they would be given a cluster_id 0
 quad = 0 # for the firts call of quadtree, because it must not recalculate half quadrants, but use the original ones
 
 # list for output writing from recursive function

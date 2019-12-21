@@ -41,7 +41,6 @@ def calculate_bbox(feats):
 def quadtree_build(feats, points_out, half_len_x, half_len_y, x_mid, y_mid, quad):
     if len(feats) < 50:
         for poi in feats:
-            # poi["properties"]["cluster_id"] = rank
             points_out.append(poi)
         return points_out
 
