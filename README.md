@@ -7,16 +7,13 @@ souřadnicemi (atribut `coordinates`). Ke každému bodu navíc přibude atribut
 který určuje, do které skupiny po dělení pomocí quadtree jednotlivé body patří. 
 
 
-
 ## Vstup
 Vstupem je soubor dat s názvem `input.geojson`, který je uložen ve formátu GeoJSON jako 
 FeatureColection bodů. 
 
 
-
 ## Výstup
 Výstup je také uložen ve formátu GeoJSON jako FeatureColection bodů s názvem `output.geojson`.
-
 
 
 ## Metoda quadtree
@@ -59,3 +56,17 @@ hodnoty bounding boxu, pomocný seznam pro přidávání `cluster_id `
 - na nové čtyři kvadranty tato funkce rekurzivně volána
 - koncová podmínka rekurze: pokud množina bodů po dělení obsahuje méně než 50 bodů, je bodům přidán
 nový atribut  `cluster_id ` jsou body jsou zapsány do výsledného seznamu  `points_out `
+
+
+## Vykreslení průběhu algoritmu quadtree pomocí želví grafiky
+
+Nejdříve jsou vizualizovány všechny vstupní body pomocí funkce _draw_input_points_. Tato funkce 
+pracuje se vstupními body (`feats`) a krajními body bounding boxu. Nejdříve je podle krajních bodů
+nastavena velikost zobrazované plochy při vykreslování. Následně jsou vykresleny jednotlivé body
+dle jejich souřadnic. 
+
+Hranice bounding boxu vykresluje funkce _draw_bbox_, jejímž vstupem jsou jeho krajní body. Tato funkce 
+je navržena tak, aby mohla být využita v rekurzivní funkci _quadtree_build_, kde při rekurzi získává 
+krajní body nově vzniklých kvadrantů, jejichž hranice následně vykresluje. Ve funkci _quadtree_build_
+je tato funkce použita ještě v koncové podmínce rekurze, a to proto, aby bylo zajištěno vykreslení 
+hranic i těch kvadrantů, které z této funkce při splnění podmínky vypadnou. 
